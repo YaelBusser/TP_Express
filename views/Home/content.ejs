@@ -1,0 +1,27 @@
+<main class="home">
+    <div class="container-video">
+        <% if (filmVideo && filmVideo.key) { %>
+            <iframe
+                    class="video"
+                    src="https://www.youtube.com/embed/<%= filmVideo.key %>?loop=1&controls=0&autoplay=1&mute=1&vq=hd1080&autohide=1&showinfo=0&modestbranding=1&playlist=<%= filmVideo.key %>"
+                    title="YouTube video player"
+            ></iframe>
+            <img class="poster" src="<%= 'https://image.tmdb.org/t/p/w1280' + film.backdrop_path %>"/>
+            <div class="details">
+                <h1><%= film.title %></h1>
+                <p class="synopsis">
+                    <%= film.overview %>
+                </p>
+            </div>
+    <% } else { %>
+            <img class="poster" src="<%= 'https://image.tmdb.org/t/p/w1280' + film.backdrop_path %>"/>
+                <div class="details">
+                    <h1><%= film.title %></h1>
+                    <p class="synopsis">
+                        <%= film.overview %>
+                    </p>
+                </div>
+        <% } %>
+        <div class="fade"></div>
+    </div>
+</main>

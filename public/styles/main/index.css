@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Netflix';
+    src: url('/fonts/NetflixSans-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Netflix-Light';
+    src: url('/fonts/NetflixSans-Light.woff2') format('woff2');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #141414;
+    font-family: Netflix, serif;
+    color: white;
+}
+
+header {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    transition: all 0.3s ease-in-out;
+}
+
+header.scrolled {
+    background-color: #141414;
+}
+
+header section {
+    /*border: 1px solid green;*/
+    display: flex;
+    gap: 2rem;
+    width: 95%;
+    padding: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 8rem;
+}
+
+.nav-header {
+    /*border: 1px solid blue;*/
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-header p a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-family: Netflix, serif;
+    transition: all 0.2s ease-in-out;
+    font-size: 14px;
+}
+
+.nav-header p a:hover {
+    color: white;
+
+}
+

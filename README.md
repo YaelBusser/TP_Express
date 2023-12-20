@@ -5,5 +5,6 @@
 1. Clonez le dépôt:
 
 ```bash
-git clone https://github.com/votre_utilisateur/mon_projet.git
-cd mon_projet
+git clone https://github.com/YaelBusser/TP_Express.git
+cd TP_Express
+npm install

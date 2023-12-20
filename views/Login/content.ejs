@@ -1,0 +1,13 @@
+<main class="main-login">
+    <section class="container-login">
+        <form action="/login" method="post" class="login-form">
+            <h2>Connexion</h2>
+            <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+            <% if (locals.error) { %>
+                <p class="error"><%= locals.error %></p>
+            <% } %>
+        </form>
+    </section>
+</main>

@@ -1,0 +1,20 @@
+<main class="main-films">
+    <img src="https://i.ibb.co/vXqDmnh/background.jpg" class="background"/>
+    <h1>Top 10 des films</h1>
+    <% films.forEach(film => { %>
+        <section class="card-film">
+            <img src="<%= 'https://image.tmdb.org/t/p/w1280' + film.backdrop_path %>" alt="<%= film.title %>"
+                 class="banner">
+            <div class="content">
+                <h2><%= film.title %></h2>
+                <div class="genre-note">
+                    <p class="genre"><%= film.genre_ids.join(', ') %></p>
+                    <p class="note"><%= film.vote_average %></p>
+                </div>
+                <p><%= film.release_date %></p>
+                <p class="synopsis"><%= film.overview %></p>
+                <button>Voir plus</button>
+            </div>
+        </section>
+    <% }); %>
+</main>
