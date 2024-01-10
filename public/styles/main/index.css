@@ -26,7 +26,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 5;
+    z-index: 999;
     transition: all 0.3s ease-in-out;
 }
 
@@ -59,8 +59,14 @@ header section {
 .nav-header {
     /*border: 1px solid blue;*/
     display: flex;
+}
+
+.nav-header-content {
+    position: relative;
+    display: flex;
     gap: 2rem;
     align-items: center;
+    width: 100%;
 }
 
 .nav-header p a {
@@ -73,6 +79,179 @@ header section {
 
 .nav-header p a:hover {
     color: white;
+}
+
+#nav-icon {
+    width: 3rem;
+    height: 45px;
+    position: relative;
+    margin: 5px auto;
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    display: none;
+}
+
+#nav-icon span {
+    display: block;
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    background: #be1313;
+    border-radius: 10px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+#nav-icon span:nth-child(1) {
+    top: 10px;
+}
+
+#nav-icon span:nth-child(2) {
+    top: 20px;
+}
+
+#nav-icon span:nth-child(3) {
+    top: 30px;
+}
+
+#nav-icon.open span:nth-child(1) {
+    top: 20px;
+    transform: rotate(135deg);
+}
+
+#nav-icon.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+#nav-icon.open span:nth-child(3) {
+    top: 20px;
+    transform: rotate(-135deg);
+}
+
+.open-content-nav-bar {
+    transition: all 0.2s ease-in-out;
+}
+
+
+.main-rooms {
+    width: auto;
+}
+
+.main-rooms h1 {
+    text-align: center;
+}
+
+.main-rooms .content {
+    width: 100%;
+    /*width: 80%;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+
+.main-rooms a {
+    font-family: "Netflix", serif;
+    text-decoration: none;
+}
+
+.main-rooms ul {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 100%;
+    height: 100vh;
+    padding-inline-start: 0;
+    background-color: #181818;
+}
+
+.main-rooms li {
+    list-style: none;
+    color: white;
+    background-color: #181818;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+    min-width: 10rem;
+}
+
+.main-rooms li:hover {
+    background-color: #1f1d1d;
+}
+
+.main-rooms li:active {
+    background-color: #000000;
+}
+
+form {
+    max-width: fit-content;
+    background-color: #181818!important;
+}
+
+form button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
 
 }
 
+form button i {
+    color: #be1313;
+    font-size: 1rem;
+}
+
+form input[type=text] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: .5rem .5rem .5rem 1rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+form input[type=text]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    /*padding-left: .6rem;*/
+}
+
+@media screen and (max-width: 900px) {
+    header section {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-header-content {
+        position: absolute;
+        left: -100rem;
+        flex-direction: column;
+    }
+
+    .open-content-nav-bar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 100vh;
+        position: absolute;
+        background-color: #181818;
+        transition: all 0.2s ease-in-out;
+    }
+
+    #nav-icon {
+        display: block;
+    }
+}

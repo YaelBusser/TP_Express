@@ -1,14 +1,34 @@
-.home{
+.home {
     position: relative;
     max-width: 100%;
 }
-.container-video{
+
+.content {
+    margin-top: -8rem;
+    position: relative;
+    z-index: 5;
+    background-color: #141414;
+    width: 50%;
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.container-video {
     position: relative;
     height: 100%;
     min-height: 100vh;
     overflow: hidden;
 }
-.video{
+
+.video {
     height: 100%;
     width: 100%;
     left: 0;
@@ -16,9 +36,10 @@
     position: absolute;
     clip-path: inset(150px 150px);
     pointer-events: none;
-    transform: scale(1.5);
+    transform: scale(1.7);
     z-index: 2;
 }
+
 .fade {
     background-image: linear-gradient(180deg, hsla(0, 0%, 8%, 0) 0, hsla(0, 0%, 8%, .15) 15%, hsla(0, 0%, 8%, .35) 29%, hsla(0, 0%, 8%, .58) 44%, #141414 68%, #141414);
     height: 15vh;
@@ -28,12 +49,14 @@
     right: 0;
     z-index: 3;
 }
+
 .poster {
     width: 100%;
     height: 100vh;
     object-fit: cover;
 }
-.details{
+
+.details {
     width: 100%;
     z-index: 3;
     position: absolute;
@@ -44,20 +67,43 @@
     justify-content: center;
     height: 100vh;
 }
-.details h1{
+
+.details h1 {
     font-size: 3rem;
     max-width: 50%;
 }
-.details .synopsis{
-    max-width: 50%;
+
+.details .synopsis {
+    max-width: 30%;
     font-family: Netflix-Light, serif;
     text-align: justify;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     padding: 1rem;
     border-radius: 10px;
+    color: #cccccc;
 }
+
 @media screen and (max-width: 1400px) {
-    .video{
+    .video {
         display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .details{
+        left: 0;
+    }
+    .details h1{
+        font-size: 2rem;
+        max-width: 100%;
+        text-align: center;
+    }
+    .synopsis {
+        max-width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .content{
+        width: 80%;
     }
 }

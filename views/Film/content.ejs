@@ -1,0 +1,62 @@
+<main class="main-film">
+    <a href="/films">
+        <div class="back">
+            <i class="fa-solid fa-chevron-left"></i>
+            <p>Retour</p>
+        </div>
+    </a>
+    <!--    <img src="https://i.ibb.co/vXqDmnh/background.jpg" class="background"/>-->
+    <div class="container-video">
+        <% if (film) { %>
+            <iframe
+                    class="video"
+                    src="https://www.youtube.com/embed/<%= filmVideo.key %>?loop=1&controls=0&autoplay=1&mute=1&vq=hd1080&autohide=1&showinfo=0&modestbranding=1&playlist=<%= filmVideo.key %>"
+                    title="YouTube video player"
+            ></iframe>
+            <img class="poster" src="<%= 'https://image.tmdb.org/t/p/w1280' + film.backdrop_path %>"/>
+            <div class="details">
+                <h1><%= film.title %></h1>
+                <p class="synopsis">
+                    <%= film.overview %>
+                </p>
+            </div>
+        <% } else { %>
+            <img class="poster" src="<%= 'https://image.tmdb.org/t/p/w1280' + film.backdrop_path %>"/>
+            <div class="details">
+                <h1><%= film.title %></h1>
+                <p class="synopsis">
+                    <%= film.overview %>
+                </p>
+            </div>
+        <% } %>
+        <div class="fade"></div>
+    </div>
+
+    <div class="content">
+        <div class="container-details">
+            <h2>À propos de <span><%= film.title %></span></h2>
+        </div>
+        <div class="container-credits">
+            <h3>Casting</h3>
+            <div class="block-credits">
+                <% credits.forEach((credit) => { %>
+                    <%
+                    if(credit.profile_path){
+                    %>
+                        <div class="container-credit">
+                            <div class="block-img-profile">
+                                <img class="img-profile"
+                                     src="https://image.tmdb.org/t/p/w1280/<%= credit.profile_path %>"
+                                     alt="profile picture casting"/>
+                            </div>
+                            <div class="block-name">
+                                <p><%= credit.name %></p>
+                                <p class="character"><%= credit.character %></p>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</main>

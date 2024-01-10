@@ -1,0 +1,31 @@
+.main-404{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url("/images/404.png") no-repeat;
+    background-size: cover;
+}
+.main-404 a{
+    color: white;
+    text-decoration: none;
+}
+.main-404 button{
+    background-color: #be1313;
+    border: none;
+    font-family: "Netflix-Light", serif;
+    color: white;
+    font-weight: 500;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.main-404 button:hover{
+    background-color: #9b1414;
+}
+.main-404 button:active{
+    background-color: #721313;
+}

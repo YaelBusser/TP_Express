@@ -1,0 +1,19 @@
+<main class="main-rooms">
+    <h1>Bienvenue, <%= username %> !</h1>
+    <section class="content">
+        <ul>
+            <% rooms.forEach(room => { %>
+                <a href="/cineChat/<%= room %>">
+                    <li>#<%= room %></li>
+                </a>
+            <% }); %>
+            <form action="/cineChat/create" method="post">
+                <input type="text" name="roomName" placeholder="Nom du salon" required/>
+                <button type="submit"><i class="fa-solid fa-plus"></i></button>
+            </form>
+            <% if (error) { %>
+                <p style="color: #be1313; font-family: 'Netflix-Light', serif; font-size: 12px;text-align: center; "><%= error %></p>
+            <% } %>
+        </ul>
+    </section>
+</main>

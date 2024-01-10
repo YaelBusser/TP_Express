@@ -1,8 +1,30 @@
 <nav class="nav-header">
-    <p><a href="/">Accueil</a></p>
-    <%- locals.username ? '<p><a href="/admin/dashboard">Dashboard</a></p>' : '' %>
-    <%- locals.username ? '<p><a href="/cineChat">CinéChat</a></p>' : '' %>
-    <p><a href="/films">TOP 10</a></p>
-    <p><a href="/contact">Contact</a></p>
-    <%- locals.username ? '<p><a href="/logout">Déconnexion</a></p>' : '<p><a href="/login">Se connecter</a></p>' %>
+    <div class="nav-header-content" id="nav-header-content">
+        <p><a href="/">Accueil</a></p>
+        <!--<%- locals.username ? '<p><a href="/admin/dashboard">Dashboard</a></p>' : '' %>-->
+        <%- locals.username ? '<p><a href="/cineChat">CinéChat</a></p>' : '' %>
+        <p><a href="/films">TOP 10</a></p>
+        <!--<%- locals.username ? '<p><a href="/logout">Déconnexion</a></p>' : '<p><a href="/login">Se connecter</a></p>' %> -->
+        <% if (locals.username) { %>
+            <p><a href="/profile">Mon profil</a></p>
+            <p><a href="/logout">Déconnexion</a></p>
+        <% } else { %>
+            <p><a href="/login">Se connecter</a></p>
+        <% } %>
+    </div>
+    <div id="nav-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let navIcon = document.getElementById('nav-icon');
+            let content = document.getElementById('nav-header-content');
+            navIcon.addEventListener('click', function () {
+                navIcon.classList.toggle('open');
+                content.classList.toggle('open-content-nav-bar');
+            });
+        });
+    </script>
 </nav>

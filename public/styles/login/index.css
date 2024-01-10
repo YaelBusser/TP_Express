@@ -28,7 +28,8 @@
 }
 
 .login-form {
-    width: 30rem;
+    width: 30%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -36,26 +37,32 @@
     padding: 3rem;
     background-color: rgb(0, 0, 0, 0.65);
 }
-.login-form h2{
+
+.main-login h2 {
     font-family: Netflix-Light, serif;
     font-size: 2rem;
 }
-input {
-    background-color: #343434;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    height: 2rem;
-    font-size: 14px;
-    color: white;
+.main-login input {
+    background-color: #343434!important;
+    padding: 10px!important;
+    border: none!important;
+    border-radius: 10px!important;
+    height: 2rem!important;
+    font-size: 14px!important;
+    color: white!important;
 }
 
-input::placeholder{
-    color: rgba(255,255,255,0.5);
+.main-login input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
     font-family: Netflix-Light, serif;
 }
-button {
-    background-color: red;
+
+.main-login input:focus {
+    outline: none;
+}
+
+.main-login button {
+    background-color: #be1313;
     height: 50px;
     color: white;
     cursor: pointer;
@@ -65,10 +72,15 @@ button {
     font-family: Netflix, serif;
     font-size: 16px;
     transition: all 0.2s ease-in-out;
-}button:hover{
-    background-color: #be1313;
- }
-.error{
+}
+
+.main-login button:hover {
+    background-color: #9b1414;
+}
+.main-login button:active{
+    background-color: #721313;
+}
+.error {
     color: red;
     font-family: Netflix-Light, serif;
     text-align: center;
