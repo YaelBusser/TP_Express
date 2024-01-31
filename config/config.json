@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "root",
+    "password": "rootpwd",
+    "database": "liveAddict",
+    "host": "localhost",
+    "dialect": "mariadb",
+    "port": 4000
+  },
+  "test": {
+    "username": "root",
+    "password": "rootpwd",
+    "database": "liveAddict",
+    "host": "localhost",
+    "dialect": "mariadb",
+    "port": 4000
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

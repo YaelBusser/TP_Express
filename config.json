@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "root",
+    "password": "rootpwd",
+    "database": "liveAddict",
+    "host": "localhost",
+    "dialect": "mariadb",
+    "port": 4000
+  }
+}

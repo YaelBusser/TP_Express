@@ -193,7 +193,7 @@ header section {
 }
 
 form {
-    max-width: fit-content;
+    /*max-width: fit-content;*/
     background-color: #181818!important;
 }
 

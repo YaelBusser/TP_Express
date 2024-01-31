@@ -1,6 +1,9 @@
 .main-cine-chat{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
+    height: 100%;
 }
 .cine-chat{
     width: 100%;
@@ -9,16 +12,50 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+}
+.cine-chat ul{
+    width: 100%;
+    overflow-y: auto;
+    max-height: 75vh;
 }
 .cine-chat form{
-
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between!important;
+    align-items: center;
+    position: fixed;
+    bottom: 1rem;
+    border-radius: 10px;
+}
+.cine-chat form input{
+    height: 2rem;
+    background-color: #3a3737;
+    border: none;
+    width: 100%;
+    padding: 0 1rem;
+    color: grey;
+    outline: none;
+    border-radius: 10px;
+}
+.cine-chat form i{
+    background-color: #be1313;
+    color: white;
+    padding: 0.5rem .5rem;
+    border-radius: 10px;
+    width: 2rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .block-rooms-and-chat{
     display: flex;
     justify-content: center;
     margin-top: 5rem;
     width: 100%;
-    height: 91vh;
+    height: calc(100vh - 84px);
     margin-left: auto;
     margin-right: auto;
     position: fixed;

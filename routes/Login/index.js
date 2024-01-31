@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
         {
             username: "clément",
             password: "clément"
-        }
+        },
     ];
     const userExists = users.some(user => user.username === username && user.password === password);
 
