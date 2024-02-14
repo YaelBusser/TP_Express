@@ -13,22 +13,22 @@ router.post('/', (req, res) => {
     const {username, password} = req.body;
     const users = [
         {
-            username: "admin",
+            username: "Admin",
             password: "admin"
         },
         {
-            username: "yael",
+            username: "Yaël",
             password: "yael"
         },
         {
-            username: "clément",
+            username: "Clément",
             password: "clément"
         },
     ];
-    const userExists = users.some(user => user.username === username && user.password === password);
+    const foundUser = users.find(user => user.username.toLowerCase() === username.toLowerCase() && user.password === password);
 
-    if (userExists) {
-        req.session.username = username;
+    if (foundUser) {
+        req.session.username = foundUser.username;
         res.redirect('/');
     } else {
         const error = "Identifiant ou mot de passe incorrect.";

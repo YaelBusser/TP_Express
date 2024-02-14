@@ -1,11 +1,13 @@
-.main-cine-chat{
+.main-cine-chat {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
     height: 100%;
+    width: 90%;
+    margin-left: 15rem;
 }
-.cine-chat{
+
+.cine-chat {
     width: 100%;
     height: 100%;
     position: relative;
@@ -14,43 +16,79 @@
     justify-content: space-between;
     align-items: center;
 }
-.cine-chat ul{
+
+.cine-chat ul {
     width: 100%;
-    overflow-y: auto;
-    max-height: 75vh;
+    color: #f3f3f3;
+    font-family: "Netflix-Light", serif;
+    word-break: break-word;
 }
-.cine-chat form{
-    width: 50%;
-    height: fit-content;
+
+.cine-chat ul li .block-info-message {
     display: flex;
-    justify-content: space-between!important;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cine-chat ul li .block-info-message .username-message {
+    font-size: 20px;
+    font-family: Netflix, serif;
+}
+
+.cine-chat ul li .block-info-message .date-message {
+    font-size: 12px;
+    color: #d3d3d3;
+    font-family: Netflix, serif;
+}
+
+.cine-chat ul li .text-message {
+    font-size: 15px;
+    color: #d3d3d3;
+    font-family: Netflix-Light, serif;
+    margin-top: .5rem;
+}
+
+.cine-chat form {
+    width: calc(100% - 15rem);
+    height: 5rem;
+    display: flex;
+    justify-content: space-between !important;
     align-items: center;
     position: fixed;
-    bottom: 1rem;
-    border-radius: 10px;
+    bottom: 0;
+    left: 15rem;
+    right: 0;
 }
-.cine-chat form input{
+
+.cine-chat form input {
     height: 2rem;
     background-color: #3a3737;
     border: none;
     width: 100%;
-    padding: 0 1rem;
+    padding: .5rem 1rem;
     color: grey;
     outline: none;
     border-radius: 10px;
 }
-.cine-chat form i{
+
+.cine-chat form i {
     background-color: #be1313;
     color: white;
     padding: 0.5rem .5rem;
     border-radius: 10px;
     width: 2rem;
-    height: 1rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .2s ease-in-out;
 }
-.block-rooms-and-chat{
+
+.cine-chat form i:hover {
+    background-color: #9d0f0f;
+}
+
+.block-rooms-and-chat {
     display: flex;
     justify-content: center;
     margin-top: 5rem;
@@ -58,5 +96,69 @@
     height: calc(100vh - 84px);
     margin-left: auto;
     margin-right: auto;
+}
+
+.block-rooms-and-chat .main-rooms {
     position: fixed;
+    left: 0;
+    top: 0;
+    width: 15rem !important;
+    margin-top: 5rem;
+}
+
+.block-rooms-and-chat .room-welcome {
+    display: none;
+}
+
+#messages {
+    width: 95%;
+    max-height: calc(100% - 6rem);
+    overflow-y: auto;
+}
+
+.user-message {
+    max-width: 30rem;
+    width: fit-content;
+    list-style-type: none;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(to right, rgb(114, 19, 19) 0%, rgba(114, 19, 19, 0) 90%);
+
+    padding: .5rem 1rem;
+}
+
+.user-message p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.other-message p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.message-system p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.other-message {
+    max-width: 30rem;
+    width: fit-content;
+    list-style-type: none;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(to left, rgba(40, 40, 60, 1) 0%, rgba(40, 0, 60, 0) 90%);
+    padding: .5rem 1rem;
+}
+
+.message-system {
+    max-width: 30rem;
+    width: fit-content;
+    list-style-type: none;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(to left, rgb(152, 152, 138) 0%, rgba(40, 0, 60, 0) 90%);
+    padding: .5rem 1rem;
 }

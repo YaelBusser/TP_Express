@@ -18,36 +18,104 @@ export default function setupCineChatRoutes(io) {
         return message;
     }
 
+    const chatHistories = {}; // Un objet pour stocker les historiques par salle
+
     io.on('connection', (socket) => {
         socket.emit('available rooms', rooms);
         let username;
         let currentRoom;
+
         socket.on('set username', (user) => {
             username = user;
+            currentRoom && addToHistory(currentRoom, `${username} a rejoint le salon.`, 'system', "Système");
+            io.to(currentRoom).emit('chat message', {
+                type: 'system',
+                message: `${username} a rejoint le salon.`,
+                date: moment().calendar(null, {
+                    sameDay: '[Aujourd’hui à] HH:mm',
+                    lastDay: '[Hier à] HH:mm',
+                    lastWeek: 'DD/MM/YYYY HH:mm',
+                    sameElse: 'DD/MM/YYYY HH:mm',
+                }),
+                userMessage: 'Système',
+            });
         });
+
+        socket.on('disconnect', () => {
+            if (username) {
+                currentRoom && addToHistory(currentRoom, `${username} a quitté le salon.`, 'system', "Système");
+                io.to(currentRoom).emit('chat message', {
+                    type: 'system',
+                    message: `${username} a quitté le salon.`,
+                    date: moment().calendar(null, {
+                        sameDay: '[Aujourd’hui à] HH:mm',
+                        lastDay: '[Hier à] HH:mm',
+                        lastWeek: 'DD/MM/YYYY HH:mm',
+                        sameElse: 'DD/MM/YYYY HH:mm',
+                    }),
+                    userMessage: 'Système',
+                });
+            }
+        });
+
         socket.on('get history', () => {
-            socket.emit('chat history', chatHistory);
+            currentRoom && socket.emit('chat history', chatHistories[currentRoom] || []);
         });
+
         socket.on('join room', (room) => {
             socket.join(room);
             currentRoom = room;
-            socket.emit('chat history', chatHistory.filter(entry => entry.room === currentRoom));
+
+            // Créer un historique pour la salle si cela n'existe pas encore
+            if (!chatHistories[currentRoom]) {
+                chatHistories[currentRoom] = [];
+            }
+
+            // Envoyer l'historique spécifique à la salle au client
+            socket.emit('chat history', chatHistories[currentRoom]);
         });
+
         socket.on('chat message', (data) => {
             let {message} = data;
             message = filterBadWords(message);
-            const formattedMessage = `[${moment().format('HH:mm:ss')}] ${username}: ${message}`;
-            chatHistory.push({message: formattedMessage, user: username, room: currentRoom});
-            // io.emit('chat message', {message: formattedMessage, user: username});
-            io.to(currentRoom).emit('chat message', {message: formattedMessage, user: username});
+            let date = moment().calendar(null, {
+                sameDay: '[Aujourd’hui à] HH:mm',
+                lastDay: '[Hier à] HH:mm',
+                lastWeek: 'DD/MM/YYYY HH:mm',
+                sameElse: 'DD/MM/YYYY HH:mm',
+            });
+            let userMessage = username;
+
+            // Ajouter le message à l'historique spécifique à la salle
+            currentRoom && addToHistory(currentRoom, message, 'user', userMessage);
+
+            io.to(currentRoom).emit('chat message', {
+                type: 'user',
+                message: message,
+                date: date,
+                userMessage: userMessage
+            });
         });
-        socket.on('disconnect', () => {
-            console.log('User disconnected');
-        });
-        socket.on('set username', (username) => {
-            console.log(`User connected: ${username}`);
-        });
+
+        function addToHistory(room, message, messageType, user) {
+            const date = moment().calendar(null, {
+                sameDay: '[Aujourd’hui à] HH:mm',
+                lastDay: '[Hier à] HH:mm',
+                lastWeek: 'DD/MM/YYYY HH:mm',
+                sameElse: 'DD/MM/YYYY HH:mm',
+            });
+
+            // Ajouter le message à l'historique spécifique à la salle
+            chatHistories[room].push({
+                type: messageType,
+                message: message,
+                date: date,
+                userMessage: user
+            });
+        }
     });
+
+
     router.get('/', (req, res) => {
         if (req.session.username) {
             res.render('Rooms', {username: req.session.username, rooms: rooms, error: error});

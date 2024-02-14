@@ -11,8 +11,10 @@
             </section>
         </main>
     </div>
+    <%- locals.username %>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const socket = io();
             const messages = document.getElementById('messages');
@@ -30,20 +32,77 @@
                 }
             });
             socket.on('chat message', function (data) {
-                const {message, user} = data;
+                const {message, userMessage, date} = data;
+
                 const item = document.createElement('li');
-                item.textContent = message;
-                item.className = user === username ? 'user-message' : 'other-message';
+
+                const blockInfoMessage = document.createElement('div')
+                blockInfoMessage.className = 'block-info-message';
+
+                const usernameDiv = document.createElement('p');
+                usernameDiv.className = 'username-message';
+                usernameDiv.textContent = userMessage;
+
+                const dateDiv = document.createElement('p');
+                dateDiv.className = 'date-message';
+                dateDiv.textContent = date;
+
+                const messageDiv = document.createElement('p');
+                messageDiv.className = 'text-message';
+                messageDiv.textContent = message;
+                if (userMessage === "Système") {
+                    item.className = 'message-system';
+                } else {
+                    item.className =  username === userMessage ? 'user-message' : 'other-message';
+                }
+
                 messages.appendChild(item);
-                window.scrollTo(0, document.body.scrollHeight);
+
+                item.appendChild(blockInfoMessage);
+
+                blockInfoMessage.appendChild(usernameDiv);
+                blockInfoMessage.appendChild(dateDiv);
+
+                item.appendChild(messageDiv);
+
+                messages.scrollTop = messages.scrollHeight;
             });
             socket.on('chat history', function (history) {
                 history.forEach(function (data) {
-                    const {message, user} = data;
+                    const {message, userMessage, date} = data;
+
                     const item = document.createElement('li');
-                    item.textContent = message;
-                    item.className = user === username ? 'user-message' : 'other-message';
+
+                    const blockInfoMessage = document.createElement('div')
+                    blockInfoMessage.className = 'block-info-message';
+
+                    const usernameDiv = document.createElement('p');
+                    usernameDiv.className = 'username-message';
+                    usernameDiv.textContent = userMessage;
+
+                    const dateDiv = document.createElement('p');
+                    dateDiv.className = 'date-message';
+                    dateDiv.textContent = date;
+
+                    const messageDiv = document.createElement('p');
+                    messageDiv.className = 'text-message';
+                    messageDiv.textContent = message;
+                    if (userMessage === "Système") {
+                        item.className = 'message-system';
+                    } else {
+                        item.className =  username === userMessage ? 'user-message' : 'other-message';
+                    }
+
                     messages.appendChild(item);
+
+                    item.appendChild(blockInfoMessage);
+
+                    blockInfoMessage.appendChild(usernameDiv);
+                    blockInfoMessage.appendChild(dateDiv);
+
+                    item.appendChild(messageDiv);
+
+                    messages.scrollTop = messages.scrollHeight;
                 });
             });
             socket.emit('set username', username);

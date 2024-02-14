@@ -54,6 +54,11 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
+app.use((req, res, next) => {
+    res.locals.req = req;
+    next();
+});
+
 // Routes de rendus
 app.use('/', RouterHome);
 app.use('/admin', RouterAdmin);
