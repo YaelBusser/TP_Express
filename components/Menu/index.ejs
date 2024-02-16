@@ -1,11 +1,11 @@
 <nav class="nav-header">
     <div class="nav-header-content" id="nav-header-content">
         <p><a href="/">Accueil</a></p>
-        <!--<%- locals.username ? '<p><a href="/admin/dashboard">Dashboard</a></p>' : '' %>-->
         <%- locals.username ? '<p><a href="/cineChat">CinéChat</a></p>' : '' %>
         <p><a href="/films">TOP 10</a></p>
         <!--<%- locals.username ? '<p><a href="/logout">Déconnexion</a></p>' : '<p><a href="/login">Se connecter</a></p>' %> -->
-        <p><a href="/graphql">Graphql</a></p>
+        <%- locals.isAdmin ? '<p><a href="/api/rest">Api Rest</a></p>' : '' %>
+        <%- locals.isAdmin ? '<p><a href="/graphql">Graphql</a></p>' : '' %>
         <% if (locals.username) { %>
             <p><a href="/profile">Mon profil</a></p>
             <p><a href="/logout">Déconnexion</a></p>

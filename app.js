@@ -23,6 +23,10 @@ import schemaConcertsParVille from "./routes/API/Graphql/Concerts/schema.js";
 import resolversConcertsParVille from "./routes/API/Graphql/Concerts/resolvers.js";
 import RouterApiRestStyles from "./routes/API/REST/Styles/index.js";
 import RouterApiRestConcerts from "./routes/API/REST/Concerts/index.js";
+import RouterApiRest from "./routes/API/REST/index.js";
+import passport from "passport";
+import {Strategy as GoogleStrategy} from "passport-google-oauth20";
+
 
 const router = Router();
 const app = express();
@@ -52,6 +56,56 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser((user, done) => {
+    done(null, user.username);
+});
+
+passport.deserializeUser((username, done) => {
+    const foundUser = users.find(user => user.username === username);
+    if (foundUser) {
+        done(null, foundUser);
+    } else {
+        done(new Error("L'utilisateur n'a pas été trouvé."));
+    }
+});
+const users = [
+    {
+        username: "Admin",
+        password: "admin",
+        isAdmin: true,
+        googleId: 0
+    },
+    {
+        username: "Yaël",
+        password: "yael",
+        isAdmin: false,
+        googleId: 0
+    },
+    {
+        username: "Clément",
+        password: "clément",
+        isAdmin: false,
+        googleId: 0
+    },
+];
+
+passport.use(new GoogleStrategy({
+    clientID: "1096595362566-g3odt7rjdmtb1fp3t8ks9svevccprbo3.apps.googleusercontent.com",
+    clientSecret: "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",
+    callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+        const newUser = {
+            googleId: profile.id,
+            username: profile.displayName,
+            isAdmin: false
+        };
+        users.push(newUser);
+        return done(null, newUser);
+}));
+
 app.use(express.static('public'));
 
 app.use((req, res, next) => {
@@ -70,6 +124,18 @@ app.use('/cineChat', setupCineChatRoutes(io));
 app.use('/logout', RouterLogout);
 app.use('/login', RouterLogin);
 app.use('/graphql', RouterGraphql);
+app.use('/api/rest', RouterApiRest);
+
+// Routes de connexion avec google
+app.get('/auth/google',
+    passport.authenticate('google', {scope: ['profile', 'email']})
+);
+app.get('/auth/google/callback',
+    passport.authenticate('google', {failureRedirect: '/login'}),
+    (req, res) => {
+        // Authentification réussie, redirigez l'utilisateur où vous le souhaitez.
+        res.redirect('/');
+    });
 
 // Routes API
 

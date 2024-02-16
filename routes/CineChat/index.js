@@ -66,12 +66,10 @@ export default function setupCineChatRoutes(io) {
             socket.join(room);
             currentRoom = room;
 
-            // Créer un historique pour la salle si cela n'existe pas encore
             if (!chatHistories[currentRoom]) {
                 chatHistories[currentRoom] = [];
             }
 
-            // Envoyer l'historique spécifique à la salle au client
             socket.emit('chat history', chatHistories[currentRoom]);
         });
 
@@ -86,7 +84,6 @@ export default function setupCineChatRoutes(io) {
             });
             let userMessage = username;
 
-            // Ajouter le message à l'historique spécifique à la salle
             currentRoom && addToHistory(currentRoom, message, 'user', userMessage);
 
             io.to(currentRoom).emit('chat message', {
@@ -118,7 +115,7 @@ export default function setupCineChatRoutes(io) {
 
     router.get('/', (req, res) => {
         if (req.session.username) {
-            res.render('Rooms', {username: req.session.username, rooms: rooms, error: error});
+            res.render('Rooms', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: error});
         } else {
             res.redirect("/login");
         }
@@ -126,7 +123,7 @@ export default function setupCineChatRoutes(io) {
     router.get('/:room', (req, res) => {
         const room = req.params.room;
         if (req.session.username) {
-            res.render('CineChat', {username: req.session.username, rooms: rooms, error: error, room: room});
+            res.render('CineChat', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: error, room: room});
         } else {
             res.redirect("/login");
         }
@@ -138,7 +135,7 @@ export default function setupCineChatRoutes(io) {
             io.emit('Salons disponibles', rooms);
             res.redirect('/cineChat');
         } else {
-            res.render('Rooms', {username: req.session.username, rooms: rooms, error: 'Le nom du salon existe déjà.'});
+            res.render('Rooms', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: 'Le nom du salon existe déjà.'});
         }
     });
     return router;

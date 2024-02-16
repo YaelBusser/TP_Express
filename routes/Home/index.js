@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         }).catch((err) => {
             console.log("Erreur: ", err);
         });
-        res.render('Home', {username: req.session.username, film: randomFilm, filmVideo: reqVideo});
+        res.render('Home', {username: req.session.username, isAdmin: req.session.isAdmin, film: randomFilm, filmVideo: reqVideo});
     } catch (err) {
         console.error(err);
     }

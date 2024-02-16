@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
             film.genres = film.genre_ids.map(genreId => genres.find(genre => genre.id === genreId).name);
             film.avis = (film.vote_average / 2).toFixed(1);
         });
-        res.status(200).render('Films', {films: films, username: req.session.username});
+        res.status(200).render('Films', {films: films, username: req.session.username, isAdmin: req.session.isAdmin});
     } catch (err) {
         console.error(err);
         res.status(500).send('Erreur lors de la récupération des films.');
