@@ -8,21 +8,24 @@
 git clone https://github.com/YaelBusser/TP_Express.git
 cd TP_Express
 npm install
-
 ```
 
 ## Choix technologies :
 
-* ECMAScript 
-  * nodesJS
+* ECMAScript
+    * nodesJS
 * Framework serveur HTTP
-  * Express
+    * Express
 * ORM
-  * Sequelize
+    * Sequelize
 * Base de données
     * [Docker](https://github.com/clemFormation/BDD-liveAddict)
-* Moteur de documentation
-  * 
+  * Moteur de documentation
+      * Swagger/OpenAPI
+          * Rentrer cette commande pour générer toutes les documentations des API dans le chemin "C:\OpenAPI\CinExpress\" (modifiable)
+        ```bash
+        openapi-generator-cli generate -i petstore.yaml -g ruby -o /OpenAPI/CinExpress/
+        ```
 
 ## API
 

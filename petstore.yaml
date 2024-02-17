@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: TP Express API
+  description: API documentation for TP Express application
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/rest/styles:
+    get:
+      summary: Get all styles
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Style'
+    post:
+      summary: Create a new style
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Style'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Style'
+  /api/rest/concerts:
+    get:
+      summary: Get all concerts
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Concert'
+    post:
+      summary: Create a new concert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Concert'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Concert'
+components:
+  schemas:
+    Style:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Concert:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        date:
+          type: string
+        location:
+          type: string
+        artist:
+          type: string
+        style:
+          $ref: '#/components/schemas/Style'
