@@ -2,7 +2,7 @@ import express from "express";
 import moment from "moment/moment.js";
 
 const router = express.Router();
-export default function setupCineChatRoutes(io) {
+const setupCineChatRoutes = (io) => {
     const rooms = ['Accueil'];
     const error = "";
 
@@ -154,3 +154,5 @@ export default function setupCineChatRoutes(io) {
     });
     return router;
 }
+
+export default setupCineChatRoutes;

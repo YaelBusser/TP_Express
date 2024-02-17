@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "Admin",
+      "password": "admin",
+      "isAdmin": true,
+      "googleId": 0
+    },
+    {
+      "username": "Yaël",
+      "password": "yael",
+      "isAdmin": false,
+      "googleId": 0
+    },
+    {
+      "username": "Clément",
+      "password": "clément",
+      "isAdmin": false,
+      "googleId": 0
+    }
+  ]
+}
