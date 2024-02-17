@@ -39,31 +39,42 @@
                 const blockInfoMessage = document.createElement('div')
                 blockInfoMessage.className = 'block-info-message';
 
-                const usernameDiv = document.createElement('p');
-                usernameDiv.className = 'username-message';
-                usernameDiv.textContent = userMessage;
+                const usernameElement = document.createElement('p');
+                usernameElement.className = 'username-message';
+                usernameElement.textContent = userMessage;
 
-                const dateDiv = document.createElement('p');
-                dateDiv.className = 'date-message';
-                dateDiv.textContent = date;
+                const dateElement = document.createElement('p');
+                dateElement.className = 'date-message';
+                dateElement.textContent = date;
 
-                const messageDiv = document.createElement('p');
-                messageDiv.className = 'text-message';
-                messageDiv.textContent = message;
+                const messageElement = document.createElement('p');
+                messageElement.className = 'text-message';
+                messageElement.textContent = message;
+
+                let pictureElement;
+
+                if (userMessage !== "Système") {
+                    pictureElement = document.createElement('img');
+                    pictureElement.className = 'img-sender';
+                    pictureElement.src = "/images/profile-picture-default.png";
+                }
+
                 if (userMessage === "Système") {
                     item.className = 'message-system';
                 } else {
-                    item.className =  username === userMessage ? 'user-message' : 'other-message';
+                    item.className = username === userMessage ? 'user-message' : 'other-message';
                 }
 
                 messages.appendChild(item);
 
                 item.appendChild(blockInfoMessage);
+                if (userMessage !== "Système") {
+                    blockInfoMessage.appendChild(pictureElement);
+                }
+                blockInfoMessage.appendChild(usernameElement);
+                blockInfoMessage.appendChild(dateElement);
 
-                blockInfoMessage.appendChild(usernameDiv);
-                blockInfoMessage.appendChild(dateDiv);
-
-                item.appendChild(messageDiv);
+                item.appendChild(messageElement);
 
                 messages.scrollTop = messages.scrollHeight;
             });
@@ -76,31 +87,42 @@
                     const blockInfoMessage = document.createElement('div')
                     blockInfoMessage.className = 'block-info-message';
 
-                    const usernameDiv = document.createElement('p');
-                    usernameDiv.className = 'username-message';
-                    usernameDiv.textContent = userMessage;
+                    const usernameElement = document.createElement('p');
+                    usernameElement.className = 'username-message';
+                    usernameElement.textContent = userMessage;
 
-                    const dateDiv = document.createElement('p');
-                    dateDiv.className = 'date-message';
-                    dateDiv.textContent = date;
+                    const dateElement = document.createElement('p');
+                    dateElement.className = 'date-message';
+                    dateElement.textContent = date;
 
-                    const messageDiv = document.createElement('p');
-                    messageDiv.className = 'text-message';
-                    messageDiv.textContent = message;
+                    const messageElement = document.createElement('p');
+                    messageElement.className = 'text-message';
+                    messageElement.textContent = message;
+
+                    let pictureElement;
+
+                    if (userMessage !== "Système") {
+                        pictureElement = document.createElement('img');
+                        pictureElement.className = 'img-sender';
+                        pictureElement.src = "/images/profile-picture-default.png";
+                    }
+
                     if (userMessage === "Système") {
                         item.className = 'message-system';
                     } else {
-                        item.className =  username === userMessage ? 'user-message' : 'other-message';
+                        item.className = username === userMessage ? 'user-message' : 'other-message';
                     }
 
                     messages.appendChild(item);
 
                     item.appendChild(blockInfoMessage);
+                    if (userMessage !== "Système") {
+                        blockInfoMessage.appendChild(pictureElement);
+                    }
+                    blockInfoMessage.appendChild(usernameElement);
+                    blockInfoMessage.appendChild(dateElement);
 
-                    blockInfoMessage.appendChild(usernameDiv);
-                    blockInfoMessage.appendChild(dateDiv);
-
-                    item.appendChild(messageDiv);
+                    item.appendChild(messageElement);
 
                     messages.scrollTop = messages.scrollHeight;
                 });

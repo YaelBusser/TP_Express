@@ -40,6 +40,11 @@
     color: #d3d3d3;
     font-family: Netflix, serif;
 }
+.cine-chat ul li .block-info-message .img-sender{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
 
 .cine-chat ul li .text-message {
     font-size: 15px;

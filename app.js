@@ -1,4 +1,4 @@
-import express, {Router} from "express";
+import express, {request, Router} from "express";
 import ejs from "ejs";
 import session from "express-session";
 import http from "http";
@@ -26,7 +26,9 @@ import RouterApiRestConcerts from "./routes/API/REST/Concerts/index.js";
 import RouterApiRest from "./routes/API/REST/index.js";
 import passport from "passport";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
+import {config as configDotenv} from 'dotenv';
 
+configDotenv();
 
 const router = Router();
 const app = express();
@@ -91,19 +93,20 @@ const users = [
         googleId: 0
     },
 ];
-
 passport.use(new GoogleStrategy({
-    clientID: "1096595362566-g3odt7rjdmtb1fp3t8ks9svevccprbo3.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "/auth/google/callback"
 }, (accessToken, refreshToken, profile, done) => {
-        const newUser = {
-            googleId: profile.id,
-            username: profile.displayName,
-            isAdmin: false
-        };
-        users.push(newUser);
-        return done(null, newUser);
+    const newUser = {
+        googleId: profile.id,
+        username: profile.displayName,
+        isAdmin: true,
+        email: profile.emails[0].value,
+        picture: profile.photos[0].value
+    };
+    users.push(newUser);
+    return done(null, newUser);
 }));
 
 app.use(express.static('public'));
@@ -112,43 +115,60 @@ app.use((req, res, next) => {
     res.locals.req = req;
     next();
 });
+const isAdmin = (req, res, next) => {
+    if (req.session.isAdmin) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+};
+const isAuthenticated = (req, res, next) => {
+    if (req.session.username) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
 
 // Routes de rendus
 app.use('/', RouterHome);
-app.use('/admin', RouterAdmin);
+app.use('/admin', isAdmin, RouterAdmin);
 app.use('/contact', RouterContact);
 app.use('/films', RouterFilms);
 app.use('/film', RouterFilm);
-app.use('/profile', RouterProfile);
-app.use('/cineChat', setupCineChatRoutes(io));
+app.use('/profile', isAuthenticated, RouterProfile);
 app.use('/logout', RouterLogout);
 app.use('/login', RouterLogin);
-app.use('/graphql', RouterGraphql);
-app.use('/api/rest', RouterApiRest);
+app.use('/graphql', isAuthenticated, isAdmin, RouterGraphql);
+app.use('/api/rest', isAuthenticated, isAdmin, RouterApiRest);
+app.use('/cineChat', isAuthenticated, isAdmin, setupCineChatRoutes(io));
 
 // Routes de connexion avec google
 app.get('/auth/google',
     passport.authenticate('google', {scope: ['profile', 'email']})
 );
+
 app.get('/auth/google/callback',
     passport.authenticate('google', {failureRedirect: '/login'}),
     (req, res) => {
-        // Authentification réussie, redirigez l'utilisateur où vous le souhaitez.
+        req.session.username = users[users.length - 1].username;
+        req.session.isAdmin = users[users.length - 1].isAdmin;
+        req.session.email = users[users.length - 1].email;
+        req.session.picture = users[users.length - 1].picture;
         res.redirect('/');
     });
 
 // Routes API
-
 // GRAPHQL
-app.use("/api/graphql/Concerts-par-ville", graphqlHTTP({
+app.use("/api/graphql/concerts-par-ville", isAdmin, graphqlHTTP({
     schema: schemaConcertsParVille,
     rootValue: resolversConcertsParVille,
     graphiql: true,
 }))
 
 // REST
-app.use('/api/rest/styles', RouterApiRestStyles);
-app.use('/api/rest/concerts', RouterApiRestConcerts);
+app.use('/api/rest/styles', isAuthenticated, isAdmin, RouterApiRestStyles);
+app.use('/api/rest/concerts', isAuthenticated, isAdmin, RouterApiRestConcerts);
 
 app.use('/404', Router404);
 app.use((req, res) => {

@@ -3,11 +3,12 @@ import express from "express";
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    if (req.session.username) {
-        res.render('Profile', {username: req.session.username, isAdmin: req.session.isAdmin});
-    } else {
-        res.redirect("/login")
-    }
+    res.render('Profile', {
+        username: req.session.username,
+        email: req.session.email,
+        picture: req.session.picture,
+        isAdmin: req.session.isAdmin
+    });
 });
 
 export default router;

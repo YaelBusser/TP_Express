@@ -3,11 +3,10 @@ import moment from "moment/moment.js";
 
 const router = express.Router();
 export default function setupCineChatRoutes(io) {
-    const chatHistory = [];
     const rooms = ['Accueil'];
     const error = "";
 
-    function filterBadWords(message) {
+    const filterBadWords = (message) => {
         const badWords = ['merde'];
         badWords.forEach(word => {
             const regex = new RegExp('\\b' + word + '\\b', 'gi');
@@ -18,7 +17,7 @@ export default function setupCineChatRoutes(io) {
         return message;
     }
 
-    const chatHistories = {}; // Un objet pour stocker les historiques par salle
+    const chatHistories = {};
 
     io.on('connection', (socket) => {
         socket.emit('available rooms', rooms);
@@ -83,14 +82,14 @@ export default function setupCineChatRoutes(io) {
                 sameElse: 'DD/MM/YYYY HH:mm',
             });
             let userMessage = username;
-
+            let picture = "op";
             currentRoom && addToHistory(currentRoom, message, 'user', userMessage);
 
             io.to(currentRoom).emit('chat message', {
                 type: 'user',
                 message: message,
                 date: date,
-                userMessage: userMessage
+                userMessage: userMessage,
             });
         });
 
@@ -102,12 +101,11 @@ export default function setupCineChatRoutes(io) {
                 sameElse: 'DD/MM/YYYY HH:mm',
             });
 
-            // Ajouter le message à l'historique spécifique à la salle
             chatHistories[room].push({
                 type: messageType,
                 message: message,
                 date: date,
-                userMessage: user
+                userMessage: user,
             });
         }
     });
@@ -115,7 +113,12 @@ export default function setupCineChatRoutes(io) {
 
     router.get('/', (req, res) => {
         if (req.session.username) {
-            res.render('Rooms', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: error});
+            res.render('Rooms', {
+                username: req.session.username,
+                isAdmin: req.session.isAdmin,
+                rooms: rooms,
+                error: error
+            });
         } else {
             res.redirect("/login");
         }
@@ -123,7 +126,13 @@ export default function setupCineChatRoutes(io) {
     router.get('/:room', (req, res) => {
         const room = req.params.room;
         if (req.session.username) {
-            res.render('CineChat', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: error, room: room});
+            res.render('CineChat', {
+                username: req.session.username,
+                isAdmin: req.session.isAdmin,
+                rooms: rooms,
+                error: error,
+                room: room
+            });
         } else {
             res.redirect("/login");
         }
@@ -135,7 +144,12 @@ export default function setupCineChatRoutes(io) {
             io.emit('Salons disponibles', rooms);
             res.redirect('/cineChat');
         } else {
-            res.render('Rooms', {username: req.session.username, isAdmin: req.session.isAdmin, rooms: rooms, error: 'Le nom du salon existe déjà.'});
+            res.render('Rooms', {
+                username: req.session.username,
+                isAdmin: req.session.isAdmin,
+                rooms: rooms,
+                error: 'Le nom du salon existe déjà.'
+            });
         }
     });
     return router;
