@@ -1,5 +1,73 @@
 <main>
     <div class="block-api">
-
+        <h1>Ensemble des API REST</h1>
+        <a class="requete" href="/api/rest/styles" target="_blank">L'ensemble des styles</a>
+        <a class="requete" href="/api/rest/artistes" target="_blank">L'ensemble des artistes</a>
+        <div class="requetes-multiple-block">
+            <p class="title">L'ensemble des concerts d'une ville</p>
+            <div class="requete-multiple-block">
+                <% villes.forEach((ville, index) => { %>
+                    <a href="/api/rest/concertsByVille/<%= ville.idVille %>" target="_blank">
+                        <div class="requete-element" data-index="<%= index %>">
+                            <%= ville.nom %>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+        <div class="requetes-multiple-block">
+            <p class="title">L'ensemble des visiteurs d'une ville</p>
+            <div class="requete-multiple-block">
+                <% villes.forEach((ville, index) => { %>
+                    <a href="/api/rest/visiteursByVille/<%= ville.idVille %>" target="_blank">
+                        <div class="requete-element" data-index="<%= index %>">
+                            <%= ville.nom %>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+        <div class="requetes-multiple-block">
+            <p class="title">L'ensemble des concerts d'un artiste</p>
+            <div class="requete-multiple-block">
+                <% artistes.forEach((artiste, index) => { %>
+                    <a href="/api/rest/concertsByArtiste/<%= artiste.IdArtiste %>" target="_blank">
+                        <div class="requete-element" data-index="<%= index %>">
+                            <%= artiste.pseudo %>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+        <div class="requetes-multiple-block">
+            <p class="title">L'ensemble des concerts d'un style pour une ville</p>
+            <div class="requete-multiple-block">
+                <% styles.forEach((style, index) => { %>
+                    <div class="requete-element-parent" data-index="<%= index %>">
+                        <span><%= style.libelle %></span>
+                        <% villes.forEach((ville, index) => { %>
+                            <a href="/api/rest/concertsByStyleAndByVille/<%= style.idStyle %>/<%= ville.idVille %>"
+                               target="_blank">
+                                <div class="requete-element-enfant" data-index="<%= index %>">
+                                    <%= ville.nom %>
+                                </div>
+                            </a>
+                        <% }); %>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div class="requetes-multiple-block">
+            <p class="title">La proportion des styles écoutés par ville</p>
+            <div class="requete-multiple-block">
+                <% villes.forEach((ville, index) => { %>
+                    <a href="/api/rest/proportionStylesByVille/<%= ville.idVille %>" target="_blank">
+                        <div class="requete-element" data-index="<%= index %>">
+                            <%= ville.nom %>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
     </div>
 </main>

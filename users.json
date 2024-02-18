@@ -17,6 +17,12 @@
       "password": "clément",
       "isAdmin": false,
       "googleId": 0
+    },
+    {
+      "username": "Simon",
+      "password": "simon",
+      "isAdmin": false,
+      "googleId": 0
     }
   ]
 }

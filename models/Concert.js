@@ -1,5 +1,6 @@
 import {DataTypes, sequelize} from "../sequelize.js";
 import Ville from "./Ville.js";
+import Joue from "./Joue.js";
 
 const Concert = () => {
     const ConcertModel = sequelize.define('Concert', {
@@ -49,6 +50,7 @@ const Concert = () => {
     });
 
     ConcertModel.belongsTo(Ville, { foreignKey: 'idVille', as: 'Ville' });
+    ConcertModel.hasMany(Joue, { foreignKey: 'idConcert', as: 'Joue' });
 
     return ConcertModel;
 };

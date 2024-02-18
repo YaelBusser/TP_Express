@@ -28,6 +28,12 @@ import schemaConcertsParVille from "./routes/API/Graphql/Concerts/schema.js";
 import resolversConcertsParVille from "./routes/API/Graphql/Concerts/resolvers.js";
 import RouterApiRestStyles from "./routes/API/REST/Styles/index.js";
 import RouterApiRestConcerts from "./routes/API/REST/Concerts/index.js";
+import RouterApiRestArtistes from "./routes/API/REST/Artistes/index.js";
+import RouterApiRestConcertsByVille from "./routes/API/REST/ConcertsByVille/index.js";
+import RouterApiRestVisiteursByVille from "./routes/API/REST/VisiteursByVille/index.js";
+import RouterApiRestConcertsByArtiste from "./routes/API/REST/ConcertsByArtiste/index.js";
+import RouterApiRestConcertsByStyleAndByVille from "./routes/API/REST/ConcertsByStyleAndByVille/index.js";
+import RouterApiRestProportionStylesByVille from "./routes/API/REST/ProportionStylesByVille/index.js";
 import RouterApiRest from "./routes/API/REST/index.js";
 import usersData from "./users.json" assert {type: 'json'};
 
@@ -158,6 +164,12 @@ app.use("/api/graphql/concerts-par-ville", isAuthenticated, isAdmin, graphqlHTTP
 // REST
 app.use('/api/rest/styles', isAuthenticated, isAdmin, RouterApiRestStyles);
 app.use('/api/rest/concerts', isAuthenticated, isAdmin, RouterApiRestConcerts);
+app.use('/api/rest/artistes', isAuthenticated, isAdmin, RouterApiRestArtistes);
+app.use('/api/rest/concertsByVille', isAuthenticated, isAdmin, RouterApiRestConcertsByVille);
+app.use('/api/rest/visiteursByVille', isAuthenticated, isAdmin, RouterApiRestVisiteursByVille);
+app.use('/api/rest/concertsByArtiste', isAuthenticated, isAdmin, RouterApiRestConcertsByArtiste);
+app.use('/api/rest/concertsByStyleAndByVille', isAuthenticated, isAdmin, RouterApiRestConcertsByStyleAndByVille);
+app.use('/api/rest/proportionStylesByVille', isAuthenticated, isAdmin, RouterApiRestProportionStylesByVille);
 
 // Gestion des erreurs et route 404
 app.use('/404', Router404);

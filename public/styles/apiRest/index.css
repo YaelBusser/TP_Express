@@ -1,3 +1,142 @@
-.block-api{
-    border: 1px solid red;
+.block-api {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-api .requete {
+    color: white;
+    text-decoration: none;
+    transition: all .2s ease-in-out .1s;
+    padding: 1rem;
+    background-color: #be1313;
+    min-width: 30rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.block-api .requete:hover {
+    color: #be1313;
+    background-color: #cccccc;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.block-api .requete:active {
+    color: #721313;
+    background-color: #ababab;
+}
+
+.requetes-multiple-block {
+    color: white;
+    text-decoration: none;
+    transition: all .2s ease-in-out .1s;
+    padding: 1rem;
+    background-color: #be1313;
+    min-width: 30rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.requetes-multiple-block:hover {
+    color: #be1313;
+    background-color: #cccccc;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.requetes-multiple-block .title {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.requete-multiple-block {
+    max-height: 0;
+    overflow-y: hidden;
+    transition: all .2s ease-in-out;
+}
+
+.requetes-multiple-block:hover .requete-multiple-block {
+    transition: all .2s ease-in-out;
+    max-height: 20rem;
+    overflow-y: auto;
+}
+
+.requetes-multiple-block:hover .title {
+    margin-bottom: 1rem;
+}
+
+.requetes-multiple-block .requete-multiple-block a {
+    color: white;
+    text-decoration: none;
+}
+
+.requetes-multiple-block .requete-multiple-block a .requete-element {
+    padding: 1rem;
+    background-color: #be1313;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: white;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.requetes-multiple-block .requete-multiple-block a:hover .requete-element {
+    color: #be1313;
+    background-color: #cccccc;
+    border: 1px solid #be1313;
+}
+
+.requetes-multiple-block .requete-multiple-block a:active .requete-element {
+    color: #be1313;
+    background-color: #adadad;
+    border: 1px solid #be1313;
+}
+
+.requete-element-parent {
+    padding: 1rem;
+    background-color: #be1313;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: white;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+    border: 1px solid transparent;
+    max-height: 1rem;
+    max-width: 10rem;
+    overflow-y: hidden;
+    cursor: pointer;
+}
+
+.requete-element-parent:hover {
+    max-height: fit-content;
+    max-width: 50%;
+    background-color: #a1a1a1;
+    transition: all .3s ease-in-out;
+}
+
+.requete-element-enfant {
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #be1313;
+    border-radius: 10px;
+    margin-top: 1rem;
+    color: white;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all .2s ease-in-out;
+}
+
+.requete-element-enfant:hover {
+    color: #be1313;
+    background-color: transparent;
+    border: 1px solid #be1313;
+}
+
+.requete-element-enfant:active {
+    background-color: #adadad;
 }
